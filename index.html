@@ -1,720 +1,426 @@
-
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>KIIN Client</title>
-
+    <meta name="description" content="KIIN Client — the ultimate free 1.8.9 PvP Minecraft client built for Bedwars and competitive play. Zero input lag, ToggleSprint, HUD display, cosmetics and more.">
     <style>
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-
-
+ 
         body {
-
             background: #0f0f0f;
-
             color: #ffffff;
-
             font-family: 'Segoe UI', sans-serif;
-
         }
-
-
-
+ 
         /* NAV */
-
         nav {
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
             padding: 20px 60px;
-
             background: #1a1a1a;
-
-            border-bottom: 2px solid #00aaff;
-
+            border-bottom: 2px solid #aa44ff;
             position: sticky;
-
             top: 0;
-
             z-index: 100;
-
         }
-
-
-
+ 
         nav img {
-
             height: 45px;
-
             image-rendering: pixelated;
-
         }
-
-
-
+ 
         nav a {
-
             color: #ffffff;
-
             text-decoration: none;
-
             margin-left: 30px;
-
             font-size: 15px;
-
             transition: color 0.2s;
-
         }
-
-
-
-        nav a:hover { color: #00aaff; }
-
-
-
+ 
+        nav a:hover { color: #aa44ff; }
+ 
+        /* Active nav state — add class="active" to the link matching the current page */
+        nav a.active {
+            color: #aa44ff;
+            border-bottom: 2px solid #aa44ff;
+            padding-bottom: 2px;
+        }
+ 
         /* HERO */
-
         .hero {
-
             text-align: center;
-
             padding: 140px 20px;
-
             background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
-
             position: relative;
-
             overflow: hidden;
-
         }
-
-
-
+ 
         .hero::before {
-
             content: '';
-
             position: absolute;
-
             top: 0; left: 0;
-
             width: 100%; height: 100%;
-
-            background: radial-gradient(circle at 50% 50%, 
-
-                        #00aaff15 0%, transparent 70%);
-
+            background: radial-gradient(circle at 50% 50%,
+                        #aa44ff15 0%, transparent 70%);
             pointer-events: none;
-
         }
-
-
-
-        .hero img {
-
+ 
+        /* Hero logo is decorative — hidden from screen readers via aria-hidden in HTML */
+        .hero .hero-logo {
             height: 100px;
-
             image-rendering: pixelated;
-
             margin-bottom: 30px;
-
         }
-
-
-
+ 
         .hero h1 {
-
             font-size: 72px;
-
             font-weight: 900;
-
-            color: #00aaff;
-
+            color: #aa44ff;
             letter-spacing: 8px;
-
-            text-shadow: 0 0 40px #00aaff55;
-
+            text-shadow: 0 0 40px #aa44ff55;
         }
-
-
-
+ 
         .hero p {
-
             font-size: 20px;
-
             color: #aaaaaa;
-
             margin: 20px auto 40px auto;
-
             max-width: 500px;
-
             line-height: 1.6;
-
         }
-
-
-
+ 
         .hero-buttons {
-
             display: flex;
-
             gap: 16px;
-
             justify-content: center;
-
-        }
-
-
-
-        .btn-primary {
-
-            background: #00aaff;
-
-            color: #000000;
-
-            padding: 16px 48px;
-
-            border-radius: 8px;
-
-            font-size: 18px;
-
-            font-weight: bold;
-
-            text-decoration: none;
-
-            transition: all 0.2s;
-
-            border: none;
-
-            cursor: pointer;
-
-        }
-
-
-
-        .btn-primary:hover {
-
-            background: #0088cc;
-
-            transform: translateY(-2px);
-
-        }
-
-
-
-        .btn-secondary {
-
-            background: transparent;
-
-            color: #ffffff;
-
-            padding: 16px 48px;
-
-            border-radius: 8px;
-
-            font-size: 18px;
-
-            font-weight: bold;
-
-            text-decoration: none;
-
-            border: 2px solid #333333;
-
-            transition: all 0.2s;
-
-        }
-
-
-
-        .btn-secondary:hover {
-
-            border-color: #00aaff;
-
-            color: #00aaff;
-
-            transform: translateY(-2px);
-
-        }
-
-
-
-        /* STATS BAR */
-
-        .stats {
-
-            display: flex;
-
-            justify-content: center;
-
-            gap: 80px;
-
-            padding: 40px;
-
-            background: #111111;
-
-            border-top: 1px solid #1a1a1a;
-
-            border-bottom: 1px solid #1a1a1a;
-
-        }
-
-
-
-        .stat h2 {
-
-            font-size: 36px;
-
-            color: #00aaff;
-
-            text-align: center;
-
-        }
-
-
-
-        .stat p {
-
-            color: #666666;
-
-            font-size: 13px;
-
-            text-align: center;
-
-            margin-top: 4px;
-
-        }
-
-
-
-        /* FEATURES */
-
-        .features-section {
-
-            padding: 100px 60px;
-
-            background: #0f0f0f;
-
-        }
-
-
-
-        .features-section h2 {
-
-            text-align: center;
-
-            font-size: 40px;
-
-            margin-bottom: 60px;
-
-            color: #ffffff;
-
-        }
-
-
-
-        .features-section h2 span {
-
-            color: #00aaff;
-
-        }
-
-
-
-        .features {
-
-            display: flex;
-
-            justify-content: center;
-
             flex-wrap: wrap;
-
-            gap: 24px;
-
-            max-width: 1200px;
-
-            margin: 0 auto;
-
         }
-
-
-
-        .feature-card {
-
-            background: #1a1a1a;
-
-            border: 1px solid #2a2a2a;
-
-            border-radius: 12px;
-
-            padding: 36px 28px;
-
-            width: 260px;
-
-            text-align: center;
-
-            transition: all 0.2s;
-
-        }
-
-
-
-        .feature-card:hover {
-
-            border-color: #00aaff;
-
-            transform: translateY(-4px);
-
-            box-shadow: 0 8px 30px #00aaff22;
-
-        }
-
-
-
-        .feature-icon {
-
-            font-size: 36px;
-
-            margin-bottom: 16px;
-
-        }
-
-
-
-        .feature-card h3 {
-
-            color: #00aaff;
-
-            margin-bottom: 12px;
-
+ 
+        .btn-primary {
+            background: #aa44ff;
+            color: #000000;
+            padding: 16px 48px;
+            border-radius: 8px;
             font-size: 18px;
-
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
         }
-
-
-
-        .feature-card p {
-
-            color: #777777;
-
-            font-size: 14px;
-
-            line-height: 1.7;
-
+ 
+        .btn-primary:hover {
+            background: #8822dd;
+            transform: translateY(-2px);
         }
-
-
-
-        /* FOOTER */
-
-        footer {
-
-            text-align: center;
-
+ 
+        .btn-secondary {
+            background: transparent;
+            color: #ffffff;
+            padding: 16px 48px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            border: 2px solid #333333;
+            transition: all 0.2s;
+        }
+ 
+        .btn-secondary:hover {
+            border-color: #aa44ff;
+            color: #aa44ff;
+            transform: translateY(-2px);
+        }
+ 
+        /* STATS BAR */
+        .stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px 60px;
             padding: 40px;
-
-            color: #333333;
-
-            font-size: 13px;
-
+            background: #111111;
             border-top: 1px solid #1a1a1a;
-
+            border-bottom: 1px solid #1a1a1a;
         }
-
-
-
-        footer span { color: #00aaff; }
-
-
-
-        /* RESPONSIVE */
-
-        @media (max-width: 768px) {
-
-            nav {
-
-                padding: 20px 30px;
-
-                flex-direction: column;
-
-                gap: 15px;
-
-            }
-
-
-
+ 
+        .stat h2 {
+            font-size: 36px;
+            color: #aa44ff;
+            text-align: center;
+        }
+ 
+        .stat p {
+            color: #666666;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 4px;
+        }
+ 
+        /* FEATURES */
+        .features-section {
+            padding: 100px 60px;
+            background: #0f0f0f;
+        }
+ 
+        .features-section h2 {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 60px;
+            color: #ffffff;
+        }
+ 
+        .features-section h2 span {
+            color: #aa44ff;
+        }
+ 
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+ 
+        .feature-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 36px 28px;
+            width: 260px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+ 
+        .feature-card:hover {
+            border-color: #aa44ff;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px #aa44ff22;
+        }
+ 
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+ 
+        .feature-card h3 {
+            color: #aa44ff;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+ 
+        .feature-card p {
+            color: #777777;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+ 
+        /* SCROLL FADE-IN */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+ 
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+ 
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #333333;
+            font-size: 13px;
+            border-top: 1px solid #1a1a1a;
+        }
+ 
+        footer span { color: #aa44ff; }
+ 
+        /* REDUCED MOTION */
+        @media (prefers-reduced-motion: reduce) {
+            .btn-primary,
+            .btn-secondary,
+            .feature-card,
             nav a {
-
-                margin-left: 15px;
-
+                transition: none;
             }
-
-
-
-            .hero h1 {
-
-                font-size: 48px;
-
+ 
+            .btn-primary:hover,
+            .btn-secondary:hover,
+            .feature-card:hover {
+                transform: none;
             }
-
-
-
-            .hero p {
-
-                font-size: 16px;
-
-            }
-
-
-
-            .hero-buttons {
-
-                flex-direction: column;
-
-                align-items: center;
-
-                gap: 12px;
-
-            }
-
-
-
-            .btn-primary, .btn-secondary {
-
-                width: 200px;
-
-            }
-
-
-
-            .stats {
-
-                gap: 40px;
-
-                flex-wrap: wrap;
-
-            }
-
-
-
-            .features-section {
-
-                padding: 60px 30px;
-
-            }
-
-
-
-            .features {
-
-                gap: 16px;
-
-            }
-
-
-
-            .feature-card {
-
-                width: 100%;
-
-                max-width: 280px;
-
-            }
-
         }
-
+ 
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px 30px;
+                flex-direction: column;
+                gap: 15px;
+            }
+ 
+            nav a {
+                margin-left: 15px;
+            }
+ 
+            .hero h1 {
+                font-size: clamp(32px, 10vw, 72px);
+            }
+ 
+            .hero p {
+                font-size: 16px;
+            }
+ 
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+ 
+            .btn-primary, .btn-secondary {
+                width: 200px;
+            }
+ 
+            .stats {
+                gap: 24px 40px;
+                padding: 30px 20px;
+            }
+ 
+            .stat {
+                min-width: 120px;
+            }
+ 
+            .features-section {
+                padding: 60px 30px;
+            }
+ 
+            .features {
+                gap: 16px;
+            }
+ 
+            .feature-card {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+ 
+        /* Extra small screens */
+        @media (max-width: 400px) {
+            .stats {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+        }
     </style>
-
 </head>
-
 <body>
-
-
-
+ 
     <nav>
-
         <img src="logo.png" alt="KIIN Client">
-
         <div>
-
-            <a href="index.html#features">Features</a>
-
+            <!-- Add class="active" to whichever link matches the current page -->
+            <a href="index.html#features" class="active">Features</a>
             <a href="download.html">Download</a>
-
-            <a href="https://github.com/KIINClient" target="_blank">GitHub</a>
-
+            <a href="https://github.com/KIINClient" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
-
     </nav>
-
-
-
+ 
     <section class="hero">
-
-        <img src="logo.png" alt="KIIN Client Logo">
-
+        <!-- aria-hidden: logo is decorative here, the h1 already names the page -->
+        <img src="logo.png" alt="" aria-hidden="true" class="hero-logo">
         <h1>KIIN CLIENT</h1>
-
-        <p>The ultimate 1.8.9 PvP client built for Bedwars 
-
+        <p>The ultimate 1.8.9 PvP client built for Bedwars
            and competitive play.</p>
-
         <div class="hero-buttons">
-
-            <a href="download.html" class="btn-primary">Download Free</a>
-
-            <a href="https://github.com/KIINClient" 
-
-               target="_blank" class="btn-secondary">View Source</a>
-
+            <a href="download.html" target="_blank" rel="noopener noreferrer" class="btn-primary">Download Free</a>
+            <a href="https://github.com/KIINClient"
+               target="_blank" rel="noopener noreferrer" class="btn-secondary">View Source</a>
         </div>
-
     </section>
-
-
-
-    <div class="stats">
-
+ 
+    <div class="stats fade-in">
         <div class="stat">
-
             <h2>1.8.9</h2>
-
             <p>MINECRAFT VERSION</p>
-
         </div>
-
         <div class="stat">
-
             <h2>100%</h2>
-
             <p>FREE FOREVER</p>
-
         </div>
-
         <div class="stat">
-
             <h2>0ms</h2>
-
             <p>ADDED INPUT LAG</p>
-
         </div>
-
         <div class="stat">
-
             <h2>∞</h2>
-
             <p>CUSTOMIZATION</p>
-
         </div>
-
     </div>
-
-
-
+ 
     <section class="features-section" id="features">
-
-        <h2>Everything You <span>Need</span></h2>
-
+        <h2 class="fade-in">Everything You <span>Need</span></h2>
         <div class="features">
-
-            <div class="feature-card">
-
+            <div class="feature-card fade-in">
                 <div class="feature-icon">⚡</div>
-
                 <h3>ToggleSprint</h3>
-
-                <p>Auto sprint so you never slow down 
-
+                <p>Auto sprint so you never slow down
                    in the middle of a fight.</p>
-
             </div>
-
-            <div class="feature-card">
-
+            <div class="feature-card fade-in">
                 <div class="feature-icon">⌨️</div>
-
                 <h3>Keystrokes</h3>
-
-                <p>QWERTY, AZERTY and DVORAK support. 
-
+                <p>QWERTY, AZERTY and DVORAK support.
                    Built for every player.</p>
-
             </div>
-
-            <div class="feature-card">
-
+            <div class="feature-card fade-in">
                 <div class="feature-icon">📊</div>
-
                 <h3>HUD Display</h3>
-
-                <p>FPS, CPS, Ping and Armor status 
-
+                <p>FPS, CPS, Ping and Armor status
                    always visible and clean.</p>
-
             </div>
-
-            <div class="feature-card">
-
-                <div class="feature-icon">🐢</div>
-
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🎭</div>
                 <h3>Cosmetics</h3>
-
-                <p>Capes, pets and more. 
-
+                <p>Capes, pets and more.
                    Stand out on any server.</p>
-
             </div>
-
-            <div class="feature-card">
-
+            <div class="feature-card fade-in">
                 <div class="feature-icon">🖥️</div>
-
                 <h3>ClickGUI</h3>
-
-                <p>Clean in-game menu to toggle 
-
+                <p>Clean in-game menu to toggle
                    any feature instantly.</p>
-
             </div>
-
-            <div class="feature-card">
-
+            <div class="feature-card fade-in">
                 <div class="feature-icon">🚶</div>
-
                 <h3>Smooth Sneak</h3>
-
-                <p>Smooth sneaking animation 
-
+                <p>Smooth sneaking animation
                    for a cleaner look.</p>
-
             </div>
-
         </div>
-
     </section>
-
-
-
-    <footer>
-
+ 
+    <footer class="fade-in">
         © 2026 <span>KIIN Client</span> — Made for the community
-
     </footer>
-
-
-
-</body>
-
+ 
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+ 
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
 </html>
+ 
