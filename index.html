@@ -287,16 +287,14 @@
             background: #111111;
             border: 2px solid #333333;
             color: #ffffff;
-            padding: 16px 24px;
+            padding: 20px 24px;
             border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
+            justify-content: flex-start;
+            gap: 16px;
         }
 
         .os-button:hover {
@@ -307,7 +305,28 @@
         }
 
         .os-icon {
-            font-size: 24px;
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .os-info {
+            text-align: left;
+            flex: 1;
+        }
+
+        .os-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .os-details {
+            font-size: 13px;
+            color: #aaaaaa;
+        }
+
+        .os-button:hover .os-details {
+            color: #000000;
         }
 
         .close-modal {
@@ -380,6 +399,15 @@
 
             .modal-header {
                 font-size: 24px;
+            }
+
+            .os-button {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .os-info {
+                text-align: center;
             }
         }
     </style>
@@ -479,15 +507,24 @@
             <div class="os-options">
                 <button class="os-button" onclick="downloadOS('windows')">
                     <span class="os-icon"><i class="fab fa-windows"></i></span>
-                    Windows 10 or above
+                    <div class="os-info">
+                        <div class="os-name">Windows</div>
+                        <div class="os-details">Supports Win 10 and above</div>
+                    </div>
                 </button>
                 <button class="os-button" onclick="downloadOS('linux')">
                     <span class="os-icon"><i class="fab fa-linux"></i></span>
-                    Linux
+                    <div class="os-info">
+                        <div class="os-name">Linux</div>
+                        <div class="os-details">Distributed as an AppImage</div>
+                    </div>
                 </button>
                 <button class="os-button" onclick="downloadOS('macos')">
                     <span class="os-icon"><i class="fab fa-apple"></i></span>
-                    macOS Sonoma (14) or newer
+                    <div class="os-info">
+                        <div class="os-name">macOS</div>
+                        <div class="os-details">Supports macOS Sonoma (14) or newer</div>
+                    </div>
                 </button>
             </div>
             <button class="close-modal" onclick="closeDownloadModal()">Close</button>
@@ -508,7 +545,7 @@
             // Replace with your actual download URLs
             const downloadLinks = {
                 windows: 'https://download.example.com/kiin-client-windows.exe',
-                linux: 'https://download.example.com/kiin-client-linux.tar.gz',
+                linux: 'https://download.example.com/kiin-client-linux.AppImage',
                 macos: 'https://download.example.com/kiin-client-macos.dmg'
             };
 
