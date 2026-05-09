@@ -97,6 +97,8 @@
             font-weight: bold;
             text-decoration: none;
             transition: all 0.2s;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-primary:hover {
@@ -205,35 +207,6 @@
             line-height: 1.7;
         }
 
-        /* DOWNLOAD */
-        .download-section {
-            text-align: center;
-            padding: 100px 20px;
-            background: linear-gradient(180deg, #0f0f0f 0%, #111111 100%);
-        }
-
-        .download-section h2 {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-
-        .download-section p {
-            color: #777777;
-            margin-bottom: 40px;
-            font-size: 16px;
-        }
-
-        .version-badge {
-            display: inline-block;
-            background: #1a1a1a;
-            border: 1px solid #2a2a2a;
-            border-radius: 20px;
-            padding: 6px 16px;
-            font-size: 13px;
-            color: #666666;
-            margin-bottom: 32px;
-        }
-
         /* FOOTER */
         footer {
             text-align: center;
@@ -244,6 +217,55 @@
         }
 
         footer span { color: #00aaff; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px 30px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin-left: 15px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 200px;
+            }
+
+            .stats {
+                gap: 40px;
+                flex-wrap: wrap;
+            }
+
+            .features-section {
+                padding: 60px 30px;
+            }
+
+            .features {
+                gap: 16px;
+            }
+
+            .feature-card {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -251,8 +273,8 @@
     <nav>
         <img src="logo.png" alt="KIIN Client">
         <div>
-            <a href="#features">Features</a>
-            <a href="#download">Download</a>
+            <a href="index.html#features">Features</a>
+            <a href="download.html">Download</a>
             <a href="https://github.com/KIINClient" target="_blank">GitHub</a>
         </div>
     </nav>
@@ -263,7 +285,7 @@
         <p>The ultimate 1.8.9 PvP client built for Bedwars 
            and competitive play.</p>
         <div class="hero-buttons">
-            <a href="#download" class="btn-primary">Download Free</a>
+            <a href="download.html" class="btn-primary">Download Free</a>
             <a href="https://github.com/KIINClient" 
                target="_blank" class="btn-secondary">View Source</a>
         </div>
@@ -328,13 +350,6 @@
                    for a cleaner look.</p>
             </div>
         </div>
-    </section>
-
-    <section class="download-section" id="download">
-        <div class="version-badge">Latest Version — v1.0.0</div>
-        <h2>Ready to Play?</h2>
-        <p>Free forever. No paid features. Just pure PvP performance.</p>
-        <a href="#" class="btn-primary">Download KIIN Client</a>
     </section>
 
     <footer>
