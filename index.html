@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KIIN Client</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             background: #0f0f0f;
@@ -37,6 +42,7 @@
             margin-left: 30px;
             font-size: 15px;
             transition: color 0.2s;
+            cursor: pointer;
         }
 
         nav a:hover { color: #00aaff; }
@@ -383,7 +389,7 @@
     <nav>
         <img src="logo.png" alt="KIIN Client">
         <div>
-            <a href="index.html#features">Features</a>
+            <a href="#features">Features</a>
             <a href="#" onclick="openDownloadModal(event)">Download</a>
             <a href="https://github.com/KIINClient" target="_blank">GitHub</a>
         </div>
@@ -472,15 +478,15 @@
             <div class="modal-header">Choose Your OS</div>
             <div class="os-options">
                 <button class="os-button" onclick="downloadOS('windows')">
-                    <span class="os-icon">🪟</span>
+                    <span class="os-icon"><i class="fab fa-windows"></i></span>
                     Windows 10 or above
                 </button>
                 <button class="os-button" onclick="downloadOS('linux')">
-                    <span class="os-icon">🐧</span>
+                    <span class="os-icon"><i class="fab fa-linux"></i></span>
                     Linux
                 </button>
                 <button class="os-button" onclick="downloadOS('macos')">
-                    <span class="os-icon">🍎</span>
+                    <span class="os-icon"><i class="fab fa-apple"></i></span>
                     macOS Sonoma (14) or newer
                 </button>
             </div>
